@@ -1,9 +1,9 @@
-name: Python package
+name: Advent of code
 
 on: [push]
 
 jobs:
-  build:
+  tests:
 
     runs-on: ubuntu-latest
 
@@ -23,5 +23,5 @@ jobs:
       run: |
         for day in day*.py; do
           echo "****** $day ******"
-          poetry run $day
+          poetry run python $day
         done
