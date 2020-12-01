@@ -1,0 +1,26 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - uses: Gr1N/setup-poetry@v4
+
+    - name: run tests
+      run: |
+        poetry run py.test
+
+    - name: solve
+      run: |
+        for day in day*.py; do
+          echo "****** $day ******"
+          poetry run $day
+        done
