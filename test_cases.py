@@ -1,5 +1,5 @@
 import pytest
-import day01, day02, day03, day04
+import day01, day02, day03, day04, day05
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -112,3 +112,14 @@ iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
 def test_day04_valid_passports(data):
     passport = day04.Passport(data)
     assert passport.fields_valid() == True
+
+day05_seats = [
+    ('FBFBBFFRLR', 357),
+    ('BFFFBBFRRR', 567),
+    ('FFFBBBFRRR', 119),
+    ('BBFFBBFRLL', 820),
+]
+
+@pytest.mark.parametrize(['seat', 'id'], day05_seats)
+def test_day05_seats(seat, id):
+    assert day05.seat_id(seat) == id

@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-import numpy as np
-
 def part1(data):
     return None
 
