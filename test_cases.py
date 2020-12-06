@@ -1,5 +1,5 @@
 import pytest
-import day01, day02, day03, day04, day05
+import day01, day02, day03, day04, day05, day06
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -123,3 +123,25 @@ day05_seats = [
 @pytest.mark.parametrize(['seat', 'id'], day05_seats)
 def test_day05_seats(seat, id):
     assert day05.seat_id(seat) == id
+
+day06_example = '''abc
+
+a
+b
+c
+
+ab
+ac
+
+a
+a
+a
+a
+
+b'''
+
+def test_day06_part1():
+    assert day06.part1(day06_example) == 11
+
+def test_day06_part2():
+    assert day06.part2(day06_example) == 6
