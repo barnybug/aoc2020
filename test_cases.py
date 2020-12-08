@@ -1,5 +1,5 @@
 import pytest
-import day01, day02, day03, day04, day05, day06, day07
+import day01, day02, day03, day04, day05, day06, day07, day08
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -178,3 +178,19 @@ def test_day07_part2_2():
 
 def test_day07_part2_answer():
     assert day07.part2(open('input07.txt').read()) == 54803
+
+day08_example = '''nop +0
+acc +1
+jmp +4
+acc +3
+jmp -3
+acc -99
+acc +1
+jmp -4
+acc +6'''
+
+def test_day08_part1():
+    assert day08.part1(day08_example) == 5
+
+def test_day08_part2():
+    assert day08.part2(day08_example) == 8
