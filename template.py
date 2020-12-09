@@ -7,6 +7,6 @@ def part2(data):
     return None
 
 if __name__ == '__main__':
-    data = open('inputX.txt').read().splitlines()
+    data = open('input.txt').read()
     print(part1(data))
     # print(part2(data))

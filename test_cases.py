@@ -1,5 +1,5 @@
 import pytest
-import day01, day02, day03, day04, day05, day06, day07, day08
+import day01, day02, day03, day04, day05, day06, day07, day08, day09
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -194,3 +194,30 @@ def test_day08_part1():
 
 def test_day08_part2():
     assert day08.part2(day08_example) == 8
+
+day09_example = '''35
+20
+15
+25
+47
+40
+62
+55
+65
+95
+102
+117
+150
+182
+127
+219
+299
+277
+309
+576'''
+
+def test_day09_part1():
+    assert day09.part1(day09_example, 5) == 127
+
+def test_day09_part2():
+    assert day09.part2(day09_example, 5) == 62
