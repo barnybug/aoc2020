@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
-import pdb
 import numpy as np
 from scipy.signal import convolve2d
-from grid import Grid
 
 conv = np.array([[1, 1, 1], [1, 0, 1], [1, 1, 1]])
 
@@ -27,40 +25,52 @@ deltas = [
 ]
 
 def part2(data):
-    grid = Grid.parse(data.splitlines())
+    grid = np.array([list(line) for line in data.splitlines()], dtype='U1')
+    space = (grid == '.')
+    mask = (grid == 'L')
+    seated = np.zeros(grid.shape, '?')
     while True:
         changed = False
-        step = Grid()
-        for xy in grid.range():
-            c = grid[xy]
-            if c == '.':
-                continue
+        now = np.copy(seated)
+        for x in range(grid.shape[1]):
+            for y in range(grid.shape[0]):
+                if space[y, x]:
+                    continue
+                s = seated[y, x]
 
-            surrounding = 0
-            for delta in deltas:
-                for i in range(1, 99):
-                    at = (xy[0] + delta[0] * i, xy[1] + delta[1] * i)
-                    atc = grid[at]
-                    if atc == '.':
-                        continue
-                    if atc == '#':
-                        surrounding += 1
-                    break
-            
-            if c == 'L' and surrounding == 0:
-                changed = True
-                step[xy] = '#'
-            elif c == '#' and surrounding >= 5:
-                changed = True
-                step[xy] = 'L'
-            else:
-                step[xy] = c
+                surrounding = 0
+                for delta in deltas:
+                    for i in range(1, 99):
+                        at = (y + delta[1] * i, x + delta[0] * i)
+                        if at[0] < 0 or at[0] >= grid.shape[0]:
+                            break
+                        if at[1] < 0 or at[1] >= grid.shape[1]:
+                            break
+                        if seated[at]:
+                            surrounding += 1
+                            break
+                        if mask[at]:
+                            break
+
+                    # bail early
+                    if not s and surrounding > 0:
+                        break
+                    elif s and surrounding >= 5:
+                        break
+                
+                if not s and surrounding == 0:
+                    changed = True
+                    now[y, x] = True
+                elif s and surrounding >= 5:
+                    changed = True
+                    now[y, x] = False
+                # else no change
 
         if not changed:
             break
-        grid = step
+        seated = now
 
-    return grid.count()['#']
+    return seated.sum()
 
 if __name__ == '__main__':
     data = open('input11.txt').read()
