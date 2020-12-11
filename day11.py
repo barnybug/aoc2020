@@ -1,32 +1,23 @@
 #!/usr/bin/env python
 
 import pdb
+import numpy as np
+from scipy.signal import convolve2d
 from grid import Grid
 
+conv = np.array([[1, 1, 1], [1, 0, 1], [1, 1, 1]])
+
 def part1(data):
-    grid = Grid.parse(data.splitlines())
+    grid = np.array([list(line) for line in data.splitlines()], dtype='U1')
+    mask = (grid == 'L')
+    seated = np.zeros(grid.shape, '?')
     while True:
-        changed = False
-        step = Grid()
-        for xy in grid.range():
-            c = grid[xy]
-            if c == '.':
-                continue
-            surrounding = sum(c == '#' for c in grid.adjacent(xy))
-            if c == 'L' and surrounding == 0:
-                changed = True
-                step[xy] = '#'
-            elif c == '#' and surrounding >= 4:
-                changed = True
-                step[xy] = 'L'
-            else:
-                step[xy] = c
-
-        if not changed:
+        occupied = convolve2d(seated, conv, mode='same')
+        now = (~seated & (occupied == 0) & mask) | (seated & (occupied < 4))
+        if np.array_equal(seated, now):
             break
-        grid = step
-
-    return grid.count()['#']
+        seated = now
+    return seated.sum()
 
 deltas = [
     (x, y)
@@ -49,8 +40,6 @@ def part2(data):
             for delta in deltas:
                 for i in range(1, 99):
                     at = (xy[0] + delta[0] * i, xy[1] + delta[1] * i)
-                    if at[0] not in grid.xrange() or at[1] not in grid.yrange():
-                        break
                     atc = grid[at]
                     if atc == '.':
                         continue
@@ -75,5 +64,5 @@ def part2(data):
 
 if __name__ == '__main__':
     data = open('input11.txt').read()
-    # print(part1(data))
+    print(part1(data))
     print(part2(data))
