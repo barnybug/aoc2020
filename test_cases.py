@@ -1,6 +1,6 @@
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
-import day11
+import day11, day12
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -254,4 +254,16 @@ def test_day11_part1():
 
 def test_day11_part2():
     assert day11.part2(day11_example) == 26
+
+day12_example = '''F10
+N3
+F7
+R90
+F11'''
+
+def test_day12_part1():
+    assert day12.part1(day12_example) == 25
+
+def test_day12_part2():
+    assert day12.part2(day12_example) == 286
 
