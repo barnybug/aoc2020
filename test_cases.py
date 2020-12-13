@@ -280,48 +280,12 @@ day13_part2_testcases = [
     ('67,x,7,59,61', 779210),
     ('67,7,x,59,61', 1261476),
     ('1789,37,47,1889', 1202161486),
+    ('19,x,x,x,x,x,x,x,x,41,x,x,x,x,x,x,x,x,x,523,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,17,13,x,x,x,x,x,x,x,x,x,x,29,x,853,x,x,x,x,x,37,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,23', 210612924879242),
 ]
 
 @pytest.mark.parametrize(('data', 'expected'), day13_part2_testcases)
 def test_day13_part2(data, expected):
     assert day13.part2(data) == expected
 
-def test_day13_Eq():
-    assert day13.Eq(5, 7).simplify() == day13.Eq(5, 2)
-
-def test_day13_LinearEqs_merge():
-    # (x) mod 19 = 0
-    # (x + 19) mod 523 = 0
-    # => (x) mod 9937 = -19
-    eqs = day13.LinearEqs([
-        day13.Eq(19, 0),
-        day13.Eq(523, 19),
-    ])
-    assert eqs.merge() == [day13.Eq(523*19, 19)]
-
-    # (x + 9) mod 41 == 0
-    # (x + 50) mod 853 == 0
-    # => (x) mod 34973 == -50
-    eqs = day13.LinearEqs([
-        day13.Eq(41, 9),
-        day13.Eq(853, 50),
-    ])
-    assert eqs.merge() == [day13.Eq(853*41, 50)]
-
-    # (x + 19) mod 493 == 0
-    # (x + 19) mod 37 == 0
-    # => (x + 19) mod 18241 == -50
-    eqs = day13.LinearEqs([
-        day13.Eq(493, 19),
-        day13.Eq(37, 19),
-    ])
-    assert eqs.merge() == [day13.Eq(493*37, 19)]
-
-    # (x + 11) mod 13 == 0
-    # (x + 50) mod 34973 == 0
-    # => (x + 50) mod 454649 == 0
-    eqs = day13.LinearEqs([
-        day13.Eq(13, 37),
-        day13.Eq(34973, 50),
-    ])
-    assert eqs.merge() == [day13.Eq(13*34973, 50)]
+def test_day13_chinese_remainder_theorem():
+    assert day13.chinese_remainder_theorem([(1,3),(4,5),(6,7)]) == 34
