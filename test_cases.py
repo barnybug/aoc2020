@@ -1,6 +1,6 @@
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
-import day11, day12
+import day11, day12, day13
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -267,3 +267,61 @@ def test_day12_part1():
 def test_day12_part2():
     assert day12.part2(day12_example) == 286
 
+day13_example = '''939
+7,13,x,x,59,x,31,19'''
+
+def test_day13_part1():
+    assert day13.part1(day13_example) == 295
+
+day13_part2_testcases = [
+    ('7,13,x,x,59,x,31,19', 1068781),
+    ('17,x,13,19', 3417),
+    ('67,7,59,61', 754018),
+    ('67,x,7,59,61', 779210),
+    ('67,7,x,59,61', 1261476),
+    ('1789,37,47,1889', 1202161486),
+]
+
+@pytest.mark.parametrize(('data', 'expected'), day13_part2_testcases)
+def test_day13_part2(data, expected):
+    assert day13.part2(data) == expected
+
+def test_day13_Eq():
+    assert day13.Eq(5, 7).simplify() == day13.Eq(5, 2)
+
+def test_day13_LinearEqs_merge():
+    # (x) mod 19 = 0
+    # (x + 19) mod 523 = 0
+    # => (x) mod 9937 = -19
+    eqs = day13.LinearEqs([
+        day13.Eq(19, 0),
+        day13.Eq(523, 19),
+    ])
+    assert eqs.merge() == [day13.Eq(523*19, 19)]
+
+    # (x + 9) mod 41 == 0
+    # (x + 50) mod 853 == 0
+    # => (x) mod 34973 == -50
+    eqs = day13.LinearEqs([
+        day13.Eq(41, 9),
+        day13.Eq(853, 50),
+    ])
+    assert eqs.merge() == [day13.Eq(853*41, 50)]
+
+    # (x + 19) mod 493 == 0
+    # (x + 19) mod 37 == 0
+    # => (x + 19) mod 18241 == -50
+    eqs = day13.LinearEqs([
+        day13.Eq(493, 19),
+        day13.Eq(37, 19),
+    ])
+    assert eqs.merge() == [day13.Eq(493*37, 19)]
+
+    # (x + 11) mod 13 == 0
+    # (x + 50) mod 34973 == 0
+    # => (x + 50) mod 454649 == 0
+    eqs = day13.LinearEqs([
+        day13.Eq(13, 37),
+        day13.Eq(34973, 50),
+    ])
+    assert eqs.merge() == [day13.Eq(13*34973, 50)]
