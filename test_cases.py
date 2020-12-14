@@ -1,6 +1,6 @@
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
-import day11, day12, day13
+import day11, day12, day13, day14
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -289,3 +289,19 @@ def test_day13_part2(data, expected):
 
 def test_day13_chinese_remainder_theorem():
     assert day13.chinese_remainder_theorem([(1,3),(4,5),(6,7)]) == 34
+
+day14_example = '''mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
+mem[8] = 11
+mem[7] = 101
+mem[8] = 0'''
+
+def test_day14_part1():
+    assert day14.part1(day14_example) == 165
+
+day14_example_2 = '''mask = 000000000000000000000000000000X1001X
+mem[42] = 100
+mask = 00000000000000000000000000000000X0XX
+mem[26] = 1'''
+
+def test_day14_part2():
+    assert day14.part2(day14_example_2) == 208
