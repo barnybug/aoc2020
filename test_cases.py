@@ -1,6 +1,6 @@
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
-import day11, day12, day13, day14
+import day11, day12, day13, day14, day15
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -305,3 +305,15 @@ mem[26] = 1'''
 
 def test_day14_part2():
     assert day14.part2(day14_example_2) == 208
+
+def test_day15_part1():
+    assert day15.part1([0,3,6]) == 436
+    assert day15.part1([1,3,2]) == 1
+    assert day15.part1([2,1,3]) == 10
+    assert day15.part1([1,2,3]) == 27
+    assert day15.part1([2,3,1]) == 78
+    assert day15.part1([3,2,1]) == 438
+    assert day15.part1([3,1,2]) == 1836
+
+def test_day15_part2():
+    assert day15.part2([0,3,6]) == 175594
