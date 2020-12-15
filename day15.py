@@ -1,7 +1,16 @@
 #!/usr/bin/env python
 
+from numba import njit
+from numba.typed import List
+
 def solve(data, nth):
-    seen = {n: i for i, n in enumerate(data)}
+    return jit_solve(List(data), nth)
+
+@njit
+def jit_solve(data, nth):
+    seen = {}
+    for i, n in enumerate(data):
+        seen[n] = i
     last = 0
     for i in range(len(data), nth-1):
         try:
