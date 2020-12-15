@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from numba import njit
+import numpy as np
+from numba import njit, uint32
 from numba.typed import List
 
 def solve(data, nth):
@@ -8,15 +9,12 @@ def solve(data, nth):
 
 @njit
 def jit_solve(data, nth):
-    seen = {}
+    seen = np.zeros(nth, uint32)
     for i, n in enumerate(data):
-        seen[n] = i
+        seen[n] = i+1
     last = 0
-    for i in range(len(data), nth-1):
-        try:
-            seen[last], last = i, i - seen[last]
-        except:
-            seen[last], last = i, 0
+    for i in range(len(data)+1, nth):
+        seen[last], last = i, (i - seen[last] if seen[last] else 0)
     return last
     
 def part1(data):
