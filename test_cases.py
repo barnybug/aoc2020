@@ -1,6 +1,6 @@
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
-import day11, day12, day13, day14, day15
+import day11, day12, day13, day14, day15, day16
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -317,3 +317,34 @@ def test_day15_part1():
 
 def test_day15_part2():
     assert day15.part2([0,3,6]) == 175594
+
+day16_example = '''class: 1-3 or 5-7
+row: 6-11 or 33-44
+seat: 13-40 or 45-50
+
+your ticket:
+7,1,14
+
+nearby tickets:
+7,3,47
+40,4,50
+55,2,20
+38,6,12'''
+
+def test_day16_part1():
+    assert day16.part1(day16_example) == 71
+
+day16_example_2 = '''class: 0-1 or 4-19
+row: 0-5 or 8-19
+seat: 0-13 or 16-19
+
+your ticket:
+11,12,13
+
+nearby tickets:
+3,9,18
+15,1,5
+5,14,9'''
+
+def test_day16_part2():
+    assert day16.field_order(day16_example_2) == ['row', 'class', 'seat']
