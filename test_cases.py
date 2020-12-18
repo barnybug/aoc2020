@@ -1,6 +1,6 @@
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
-import day11, day12, day13, day14, day15, day16, day17
+import day11, day12, day13, day14, day15, day16, day17, day18
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -358,3 +358,29 @@ def test_day17_part1():
 
 def test_day17_part2():
     assert day17.part2(day17_example) == 848
+
+day18_part1_cases = [
+    ('1 + 2 * 3 + 4 * 5 + 6', 71),
+    ('1 + (2 * 3) + (4 * (5 + 6))', 51),
+    ('2 * 3 + (4 * 5)', 26),
+    ('5 + (8 * 3 + 9 + 3 * 4 * 3)', 437),
+    ('5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))', 12240),
+    ('((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2', 13632),
+]
+
+@pytest.mark.parametrize(['expression', 'value'], day18_part1_cases)
+def test_day18_part1(expression, value):
+    assert day18.part1(expression) == value
+
+day18_part2_cases = [
+    ('1 + 2 * 3 + 4 * 5 + 6', 231),
+    ('1 + (2 * 3) + (4 * (5 + 6))', 51),
+    ('2 * 3 + (4 * 5)', 46),
+    ('5 + (8 * 3 + 9 + 3 * 4 * 3)', 1445),
+    ('5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))', 669060),
+    ('((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2', 23340),
+]
+
+@pytest.mark.parametrize(['expression', 'value'], day18_part2_cases)
+def test_day18_part2(expression, value):
+    assert day18.part2(expression) == value
