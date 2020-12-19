@@ -400,6 +400,3 @@ aaaabbb'''
 
 def test_day19_part1():
     assert day19.part1(day19_example) == 2
-
-def test_day19_part2():
-    assert day19.part2(day19_example) == 848
