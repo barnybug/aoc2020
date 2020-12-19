@@ -1,6 +1,6 @@
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
-import day11, day12, day13, day14, day15, day16, day17, day18
+import day11, day12, day13, day14, day15, day16, day17, day18, day19
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -384,3 +384,22 @@ day18_part2_cases = [
 @pytest.mark.parametrize(['expression', 'value'], day18_part2_cases)
 def test_day18_part2(expression, value):
     assert day18.part2(expression) == value
+
+day19_example = '''0: 4 1 5
+1: 2 3 | 3 2
+2: 4 4 | 5 5
+3: 4 5 | 5 4
+4: "a"
+5: "b"
+
+ababbb
+bababa
+abbbab
+aaabbb
+aaaabbb'''
+
+def test_day19_part1():
+    assert day19.part1(day19_example) == 2
+
+def test_day19_part2():
+    assert day19.part2(day19_example) == 848
