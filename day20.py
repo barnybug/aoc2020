@@ -8,6 +8,8 @@ import re
 import numpy as np
 from math import prod, sqrt
 
+from scipy.signal.signaltools import convolve2d
+
 pow2 = np.array([
     [1 << i, 1 << (9-i)]
     for i in range(10)
@@ -138,18 +140,15 @@ def solve_snakes(combined):
 #    ##    ##    ###
  #  #  #  #  #  #   '''.strip('\n')
     snake = grid_to_array(snake)
+    filter = np.rot90(snake, 2) # convolution filter is flipped
     snakelen = snake.sum()
-    found = False
     for i in range(NUM_TRANSFORMATIONS):
         d = transformations(combined, i)
-        for y in range(d.shape[0] - snake.shape[0] + 1):
-            for x in range(d.shape[1] - snake.shape[1] + 1):
-                window = d[y:y+snake.shape[0], x:x+snake.shape[1]]
-                if (window * snake).sum() == snakelen:
-                    window -= snake
-                    found = True
-        if found:
-            return d.sum()
+        cv = convolve2d(d, filter, mode='valid')
+        snakes = (cv == snakelen).sum()
+        # assumption: no overlaps
+        if snakes:
+            return d.sum() - snakes*snakelen
 
 def part2(data):
     tiles = [Tile.parse(tiledata) for tiledata in data.split('\n\n')]
