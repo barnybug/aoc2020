@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
 import day11, day12, day13, day14, day15, day16, day17, day18, day19, day20
+import day21
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -529,3 +530,14 @@ def test_day20_reorient():
 
 def test_day20_part2():
     assert day20.part2(day20_example) == 273
+
+day21_example = '''mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
+trh fvjkl sbzzf mxmxvkd (contains dairy)
+sqjhc fvjkl (contains soy)
+sqjhc mxmxvkd sbzzf (contains fish)'''
+
+def test_day21_part1():
+    assert day21.part1(day21_example) == 5
+
+def test_day21_part2():
+    assert day21.part2(day21_example) == 'mxmxvkd,sqjhc,fvjkl'
