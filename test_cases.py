@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
 import day11, day12, day13, day14, day15, day16, day17, day18, day19, day20
-import day21
+import day21, day22
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -541,3 +541,23 @@ def test_day21_part1():
 
 def test_day21_part2():
     assert day21.part2(day21_example) == 'mxmxvkd,sqjhc,fvjkl'
+
+day22_example = '''Player 1:
+9
+2
+6
+3
+1
+
+Player 2:
+5
+8
+4
+7
+10'''
+
+def test_day22_part1():
+    assert day22.part1(day22_example) == 306
+
+def test_day22_part2():
+    assert day22.part2(day22_example) == 291
