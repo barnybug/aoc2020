@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
+from numba import njit
+from numba.typed import List
+
+@njit
 def play(cups, times):
     n = max(cups)
 
-    nodes = [None] * (n+1)
-    for a, b in zip(cups, cups[1:] + cups[:1]):
-        nodes[a] = b
+    nodes = [0] * (n+1)
+    for i in range(n):
+        nodes[cups[i]] = cups[(i+1) % n]
 
     current = cups[0]
     for i in range(times):
@@ -33,12 +37,12 @@ def play(cups, times):
         yield i
 
 def part1(data):
-    cups = list(map(int, data))
+    cups = List(map(int, data))
     cups = play(cups, 100)
     return ''.join(map(str, cups))
 
 def part2(data):
-    cups = list(map(int, data))
+    cups = List(map(int, data))
     for i in range(9, 1000000):
         cups.append(i+1)
     it = play(cups, 10000000)
