@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
 import day11, day12, day13, day14, day15, day16, day17, day18, day19, day20
-import day21, day22, day23
+import day21, day22, day23, day24
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -567,3 +567,30 @@ def test_day23_part1():
 
 def test_day23_part2():
     assert day23.part2('389125467') == 149245887792
+
+day24_example = '''sesenwnenenewseeswwswswwnenewsewsw
+neeenesenwnwwswnenewnwwsewnenwseswesw
+seswneswswsenwwnwse
+nwnwneseeswswnenewneswwnewseswneseene
+swweswneswnenwsewnwneneseenw
+eesenwseswswnenwswnwnwsewwnwsene
+sewnenenenesenwsewnenwwwse
+wenwwweseeeweswwwnwwe
+wsweesenenewnwwnwsenewsenwwsesesenwne
+neeswseenwwswnwswswnw
+nenwswwsewswnenenewsenwsenwnesesenew
+enewnwewneswsewnwswenweswnenwsenwsw
+sweneswneswneneenwnewenewwneswswnese
+swwesenesewenwneswnwwneseswwne
+enesenwswwswneneswsenwnewswseenwsese
+wnwnesenesenenwwnenwsewesewsesesew
+nenewswnwewswnenesenwnesewesw
+eneswnwswnwsenenwnwnwwseeswneewsenese
+neswnwewnwnwseenwseesewsenwsweewe
+wseweeenwnesenwwwswnew'''
+
+def test_day24_part1():
+    assert day24.part1(day24_example) == 10
+
+def test_day24_part2():
+    assert day24.part2(day24_example) == 2208
