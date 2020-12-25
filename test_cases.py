@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
 import day11, day12, day13, day14, day15, day16, day17, day18, day19, day20
-import day21, day22, day23, day24
+import day21, day22, day23, day24, day25
 
 def test_day01_part1():
     assert day01.part1([1721,979,366,299,675,1456]) == 514579
@@ -594,3 +594,11 @@ def test_day24_part1():
 
 def test_day24_part2():
     assert day24.part2(day24_example) == 2208
+
+def test_day25_modlog():
+    assert day25.modlog(5, 22, 53) == 9
+    assert day25.modlog(7, 5764801, 20201227) == 8
+    assert day25.modlog(7, 17807724, 20201227) == 11
+
+def test_day25_part1():
+    assert day25.part1(5764801, 17807724) == 14897079
